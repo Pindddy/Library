@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>閱讀 — 江湖藏書閣</title><link rel="stylesheet" href="./css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./js/supabase.js"></script><script defer src="./js/common.js"></script><script defer src="./js/reader.js"></script>
+</head>
+<body class="reader-page">
+  <header class="reader-topbar"><a class="brand" href="./index.html"><span class="brand-mark">俠</span><span>江湖藏書閣<small>WUXIA LIBRARY</small></span></a><div class="reader-top-actions"><a href="./account.html" class="nav-link">我的書架</a><button id="bookmarkBtn" class="button button-small button-outline">☆ 收藏</button></div></header>
+  <main class="reading-layout">
+    <aside class="chapter-sidebar"><a class="back-link" href="./index.html">← 返回藏書總目</a><div class="sidebar-book-title" id="sidebarBookTitle">載入作品中…</div><div class="sidebar-author" id="sidebarAuthor"></div><div class="sidebar-label">章節目錄 <span id="chapterCount"></span></div><div id="chapterList" class="reader-chapter-list"></div></aside>
+    <article class="reading-panel">
+      <div class="reading-toolbar"><span id="readingCategory" class="reading-category">武俠小說</span><div class="reader-settings"><button id="fontDown" aria-label="縮小字體">A−</button><button id="fontUp" aria-label="放大字體">A＋</button><button id="themeToggle" aria-label="切換閱讀背景">◐</button></div></div>
+      <div class="reading-content"><div class="chapter-kicker" id="chapterKicker">CHAPTER</div><h1 id="chapterTitle">請選擇章節</h1><div class="reading-divider"><span>✦</span></div><div id="chapterBody" class="chapter-body"><p>正在載入作品資料……</p></div><div class="reading-notice" id="readingNotice"></div></div>
+      <div class="chapter-navigation"><button id="prevChapter" class="button button-outline">← 上一章</button><span id="chapterPosition">— / —</span><button id="nextChapter" class="button button-primary">下一章 →</button></div>
+    </article>
+  </main>
+</body>
+</html>

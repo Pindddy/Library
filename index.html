@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101722">
+  <meta name="description" content="江湖藏書閣：探索武俠小說、作者與章節。">
+  <title>江湖藏書閣 — 武俠小說圖書館</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./js/supabase.js"></script>
+  <script defer src="./js/common.js"></script>
+  <script defer src="./js/library.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./index.html"><span class="brand-mark">俠</span><span>江湖藏書閣<small>WUXIA LIBRARY</small></span></a>
+    <nav class="nav">
+      <a class="nav-link active" href="./index.html">藏書總目</a>
+      <a class="nav-link" href="./account.html">我的書架</a>
+      <a class="nav-link" id="adminNav" href="./admin.html" hidden>管理後台</a>
+      <a class="button button-small button-outline" id="authNav" href="./auth.html">登入 / 註冊</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-line"></span> A LIBRARY OF MARTIAL ARTS</div>
+        <h1>江湖很遠，<br><em>故事不散。</em></h1>
+        <p>從名家經典到新派俠義，在字裡行間尋訪自己的江湖。</p>
+        <a class="button button-primary" href="#library">開始尋書 <span aria-hidden="true">↘</span></a>
+      </div>
+      <div class="hero-art" aria-label="山水意象裝飾">
+        <div class="sun"></div><div class="mountain mountain-back"></div><div class="mountain mountain-front"></div>
+        <div class="hero-seal">藏<br>書</div>
+        <div class="hero-caption">一卷風雲 · 萬里江湖</div>
+      </div>
+      <div class="hero-index"><span>01</span><span class="index-rule"></span><span>THE COLLECTION</span></div>
+    </section>
+
+    <section class="stats-row" aria-label="藏書統計">
+      <div><span class="stat-value" id="statBooks">—</span><span class="stat-label">部作品</span></div>
+      <div><span class="stat-value" id="statAuthors">—</span><span class="stat-label">位作者</span></div>
+      <div><span class="stat-value" id="statChapters">—</span><span class="stat-label">個章節</span></div>
+      <div class="data-status"><span class="status-dot"></span><span id="dataStatus">正在整理藏書……</span></div>
+    </section>
+
+    <section class="library-section" id="library">
+      <div class="section-heading">
+        <div><div class="eyebrow">THE CATALOGUE</div><h2>藏書總目</h2><p>挑一本書，進入另一段江湖。</p></div>
+        <div class="view-note">收藏好故事，也收藏走過的路。</div>
+      </div>
+      <div class="toolbar">
+        <label class="search-box"><span aria-hidden="true">⌕</span><input id="searchInput" type="search" placeholder="搜尋書名、作者、關鍵字…" autocomplete="off"></label>
+        <select id="authorFilter" aria-label="按作者篩選"><option value="">所有作者</option></select>
+        <select id="sortFilter" aria-label="排序方式"><option value="featured">推薦排序</option><option value="title">依書名排序</option><option value="author">依作者排序</option></select>
+      </div>
+      <div class="category-row" id="categoryRow">
+        <button class="chip active" data-category="">全部作品</button>
+        <button class="chip" data-category="經典武俠">經典武俠</button>
+        <button class="chip" data-category="歷史武俠">歷史武俠</button>
+        <button class="chip" data-category="奇情武俠">奇情武俠</button>
+        <button class="chip" data-category="探案武俠">探案武俠</button>
+      </div>
+      <div class="results-line"><span id="resultCount">—</span><span>點選作品即可查看章節</span></div>
+      <div class="book-grid" id="bookGrid" aria-live="polite"></div>
+      <div class="empty-state" id="emptyState" hidden><div class="empty-symbol">卷</div><h3>未找到這本書</h3><p>試試其他書名、作者或分類。</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="footer-brand" href="./index.html">江湖藏書閣</a><span>以文字記錄俠義，以閱讀走入江湖。</span><span>© <span id="year"></span> Wuxia Library</span></footer>
+</body>
+</html>
