@@ -9,8 +9,6 @@
 - Supabase Auth 會員登入／註冊
 - 雲端收藏與閱讀進度
 - 管理員作品、作者、章節 CRUD
-- Row Level Security (RLS) 權限政策
-- Supabase 未設定時可瀏覽本機示範資料
 
 ## 1. 建立 Supabase
 
