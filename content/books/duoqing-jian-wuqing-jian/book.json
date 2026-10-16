@@ -1,0 +1,12 @@
+{
+  "slug": "duoqing-jian-wuqing-jian",
+  "title": "多情劍客無情劍",
+  "author": "古龍",
+  "description": "描繪友情、情感與江湖規則的矛盾。",
+  "category": "奇情武俠",
+  "cover_style": "blue",
+  "is_published": true,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}

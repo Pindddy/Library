@@ -1,0 +1,12 @@
+{
+  "slug": "baifa-monv-zhuan",
+  "title": "白髮魔女傳",
+  "author": "梁羽生",
+  "description": "描繪情感、門派與時代之間的衝突。",
+  "category": "歷史武俠",
+  "cover_style": "gold",
+  "is_published": true,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}

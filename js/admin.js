@@ -174,21 +174,92 @@ document.addEventListener("DOMContentLoaded", async () => {
   $("refreshDataBtn").addEventListener("click", async () => { try { await loadAll(); say("資料已重新載入。", true); } catch (error) { fail(error); } });
   $("exportDataBtn").addEventListener("click", exportBackup);
 
-  function exportBackup() {
-    const backup = {
-      format: "wuxia-library-backup",
-      version: 1,
-      exported_at: new Date().toISOString(),
-      note: "資料匯出備份。此檔案不包含會員登入憑證。",
-      authors, books, chapters
+  async function exportBackup() {
+    if (typeof window.JSZip === "undefined") {
+      say("ZIP 工具載入失敗。請確認網路連線後重新整理頁面。", false);
+      return;
+    }
+    const zip = new window.JSZip();
+    const exportedAt = new Date().toISOString();
+    const safeFolderName = (title, id) => {
+      const safe = String(title || "未命名作品")
+        .normalize("NFKC")
+        .replace(/[\\/:*?"<>|]/g, "_")
+        .replace(/[. ]+$/g, "")
+        .trim() || "未命名作品";
+      return `${safe}-${String(id || "unknown").slice(0, 8)}`;
     };
-    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `wuxia-library-backup-${new Date().toISOString().slice(0, 10)}.json`;
-    document.body.append(link); link.click(); link.remove(); URL.revokeObjectURL(url);
-    say("資料備份已匯出。請將備份檔保存在安全的位置。", true);
+    zip.file("README.md", [
+      "# 江湖藏書閣作品資料備份",
+      "",
+      `匯出時間：${exportedAt}`,
+      "",
+      "每部作品各自放在 `books/作品名稱-ID/` 資料夾中。作品資料位於 `book.json`，章節正文位於 `chapters/`，每個 Markdown 檔案前方包含章節資訊。",
+      "修改這份 ZIP 內的檔案不會自動更新 Supabase；要讓網站內容同步，仍需在管理後台編輯，或透過後續匯入工具寫回資料庫。",
+      ""
+    ].join("\n"));
+    zip.file("authors.json", JSON.stringify(authors, null, 2));
+    zip.file("manifest.json", JSON.stringify({
+      format: "wuxia-library-folder-backup",
+      version: 2,
+      exported_at: exportedAt,
+      book_count: books.length,
+      chapter_count: chapters.length,
+      author_count: authors.length
+    }, null, 2));
+
+    books.forEach(book => {
+      const folder = `books/${safeFolderName(book.title, book.id)}`;
+      const author = authors.find(item => item.id === book.author_id) || null;
+      const bookChapters = chapters
+        .filter(chapter => chapter.book_id === book.id)
+        .sort((a, b) => a.chapter_number - b.chapter_number);
+      zip.file(`${folder}/book.json`, JSON.stringify({
+        ...book,
+        author: author ? { id: author.id, name: author.name } : null,
+        chapter_count: bookChapters.length
+      }, null, 2));
+      zip.file(`${folder}/README.md`, [
+        `# ${book.title}`,
+        "",
+        "- 編輯作品資訊：`book.json`",
+        "- 章節內容：`chapters/`",
+        "- 章節編號採三位數，例如 `001.md`、`002.md`。",
+        "- 這是資料備份資料夾；直接修改檔案不會自動同步到 Supabase。",
+        ""
+      ].join("\n"));
+      bookChapters.forEach(chapter => {
+        const chapterName = `${String(chapter.chapter_number).padStart(3, "0")}.md`;
+        const markdown = [
+          "---",
+          `id: ${JSON.stringify(chapter.id)}`,
+          `book_id: ${JSON.stringify(chapter.book_id)}`,
+          `chapter_number: ${chapter.chapter_number}`,
+          `title: ${JSON.stringify(chapter.title)}`,
+          `is_published: ${Boolean(chapter.is_published)}`,
+          "---",
+          "",
+          chapter.content || "",
+          ""
+        ].join("\n");
+        zip.file(`${folder}/chapters/${chapterName}`, markdown);
+      });
+    });
+
+    try {
+      const blob = await zip.generateAsync({ type: "blob" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `wuxia-library-books-${new Date().toISOString().slice(0, 10)}.zip`;
+      document.body.append(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      say("已匯出分作品資料夾 ZIP。每部作品各有獨立資料夾，請妥善保存備份。", true);
+    } catch (error) {
+      fail(error);
+    }
   }
 
   function resetBookForm() { $("bookForm").reset(); $("bookId").value = ""; $("bookForm").hidden = true; }

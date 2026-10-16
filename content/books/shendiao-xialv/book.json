@@ -1,0 +1,12 @@
+{
+  "slug": "shendiao-xialv",
+  "title": "神鵰俠侶",
+  "author": "金庸",
+  "description": "楊過與小龍女的江湖經歷，交織情義與成長。",
+  "category": "經典武俠",
+  "cover_style": "blue",
+  "is_published": true,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}

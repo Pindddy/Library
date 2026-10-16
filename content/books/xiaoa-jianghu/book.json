@@ -1,0 +1,12 @@
+{
+  "slug": "xiaoa-jianghu",
+  "title": "笑傲江湖",
+  "author": "金庸",
+  "description": "令狐沖身處門派紛爭，追尋自己的江湖之道。",
+  "category": "經典武俠",
+  "cover_style": "red",
+  "is_published": true,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}

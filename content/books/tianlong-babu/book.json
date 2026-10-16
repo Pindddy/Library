@@ -1,0 +1,12 @@
+{
+  "slug": "tianlong-babu",
+  "title": "天龍八部",
+  "author": "金庸",
+  "description": "多位人物的命運交錯，呈現恩怨與身世之謎。",
+  "category": "群像武俠",
+  "cover_style": "gold",
+  "is_published": true,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}

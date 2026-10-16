@@ -9,6 +9,8 @@
 - Supabase Auth 會員登入／註冊
 - 雲端收藏與閱讀進度
 - 管理員作品、作者、章節 CRUD
+- Row Level Security (RLS) 權限政策
+- Supabase 未設定時可瀏覽本機示範資料
 
 ## 1. 建立 Supabase
 
@@ -72,3 +74,10 @@ where p.id = u.id
 - 書庫 seed 只有少量範例。示範正文是原創測試內容，不是任何既有小說的原文。
 - 若要正式公開完整小說，請確保你有權發布相關作品及正文。
 - 目前書架的訪客收藏使用瀏覽器 localStorage；登入後收藏與閱讀進度可同步至 Supabase。
+
+
+## 6. 每部作品獨立資料夾
+
+作品原始檔放在 `content/books/`，每部作品都有自己的資料夾：`book.json` 存放作品資訊，`chapters/001.md`、`chapters/002.md` 等檔案分開存放各章正文。新增作品時可複製 `content/books/_template-work/`。
+
+管理後台的「匯出分作品資料夾 ZIP」會將目前 Supabase 中的每部作品輸出成獨立資料夾，方便備份及逐本維護。**注意：** 編輯 GitHub 中的 `content/books/` 檔案不會自動更新 Supabase；線上資料仍須透過管理後台更新，或另外實作匯入同步功能。

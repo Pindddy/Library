@@ -1,0 +1,12 @@
+{
+  "slug": "new-work-slug",
+  "title": "新作品名稱",
+  "author": "作者名稱",
+  "description": "作品簡介",
+  "category": "武俠小說",
+  "cover_style": "jade",
+  "is_published": false,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}

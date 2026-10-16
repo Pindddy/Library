@@ -1,0 +1,12 @@
+{
+  "slug": "chuliuxiang-chuanqi",
+  "title": "楚留香傳奇",
+  "author": "古龍",
+  "description": "楚留香憑藉機智追查撲朔迷離的江湖事件。",
+  "category": "探案武俠",
+  "cover_style": "jade",
+  "is_published": true,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}

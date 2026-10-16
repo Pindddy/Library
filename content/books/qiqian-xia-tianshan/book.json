@@ -1,0 +1,12 @@
+{
+  "slug": "qiqian-xia-tianshan",
+  "title": "七劍下天山",
+  "author": "梁羽生",
+  "description": "天山高手與江湖人物的俠義傳奇。",
+  "category": "歷史武俠",
+  "cover_style": "red",
+  "is_published": true,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}

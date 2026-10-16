@@ -1,0 +1,12 @@
+{
+  "slug": "shediao-yingxiongzhuan",
+  "title": "射鵰英雄傳",
+  "author": "金庸",
+  "description": "以郭靖的成長為主線，交織江湖恩怨與家國情懷。",
+  "category": "經典武俠",
+  "cover_style": "jade",
+  "is_published": true,
+  "chapters": [
+    "chapters/001.md"
+  ]
+}
